@@ -5,20 +5,29 @@ import { useChat } from "../hooks/useChat";
 import { ChatMessages, ChatInput } from "./Chat";
 
 export default function App() {
-  const { messages, loading, error, sendMessage, clearChat } = useChat();
+  const { messages, loading, error, isConnected, sendMessage, clearChat } = useChat();
 
   return (
     <div className="h-dvh bg-[var(--background)] p-4 sm:p-6 flex flex-col">
       <div className="max-w-[480px] w-full mx-auto flex flex-col flex-1 min-h-0">
         {/* Header */}
         <div className="flex items-center justify-between mb-4 shrink-0">
-          <div>
-            <h1 className="text-xl font-semibold text-[var(--text)]">
-              Chat Assistant
-            </h1>
-            <p className="text-sm text-[var(--text-muted)]">
-              Ask me anything
-            </p>
+          <div className="flex items-center gap-3">
+            <div>
+              <h1 className="text-xl font-semibold text-[var(--text)]">
+                Chat Assistant
+              </h1>
+              <p className="text-sm text-[var(--text-muted)]">
+                Ask me anything
+              </p>
+            </div>
+            {/* Connection indicator */}
+            <div
+              className={`w-2 h-2 rounded-full ${
+                isConnected ? "bg-green-500" : "bg-red-500"
+              }`}
+              title={isConnected ? "Connected" : "Disconnected"}
+            />
           </div>
           {messages.length > 0 && (
             <button

@@ -45,24 +45,26 @@ export default function ChatMessages({ messages, loading }: Props) {
         </div>
       )}
 
-      {messages.map((message) => (
-        <MessageBubble key={message.id} message={message} />
-      ))}
-
-      {loading && (
-        <div className="self-start mt-3">
-          <div className="bg-white border border-[var(--border)] rounded-2xl rounded-bl-md px-4 py-3 shadow-[var(--shadow)]">
-            <ThreeDots
-              visible={true}
-              height="20"
-              width="40"
-              color="var(--primary)"
-              radius="9"
-              ariaLabel="three-dots-loading"
-            />
-          </div>
-        </div>
-      )}
+      {messages.map((message) => {
+        // Don't render empty streaming messages - show ThreeDots instead
+        if (message.role === "assistant" && message.content === "") {
+          return (
+            <div key={message.id} className="self-start mt-3">
+              <div className="bg-white border border-[var(--border)] rounded-2xl rounded-bl-md px-4 py-3 shadow-[var(--shadow)]">
+                <ThreeDots
+                  visible={true}
+                  height="20"
+                  width="40"
+                  color="var(--primary)"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
+                />
+              </div>
+            </div>
+          );
+        }
+        return <MessageBubble key={message.id} message={message} />;
+      })}
 
       <div ref={messagesEndRef} />
     </div>
