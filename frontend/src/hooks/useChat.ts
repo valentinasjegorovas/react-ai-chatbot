@@ -4,12 +4,10 @@ import { sendChatMessage } from "../api/chat";
 import useLocalStorage from "./useLocalStorage";
 import { type Messages, type Message } from "../types";
 
-const DEFAULT_CONTEXT: Messages = [
-  { id: "system-1", role: "developer", content: "act like a buddie" },
-];
+const INITIAL_MESSAGES: Messages = [];
 
 export function useChat() {
-  const [messages, setMessages] = useLocalStorage("chat", DEFAULT_CONTEXT);
+  const [messages, setMessages] = useLocalStorage("chat", INITIAL_MESSAGES);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -38,7 +36,7 @@ export function useChat() {
         const response = await sendChatMessage(history);
 
         const assistantMessage: Message = {
-          id: uuidv4(),
+          id: uuidv4(), 
           role: "assistant",
           content: response.content,
         };
@@ -56,17 +54,12 @@ export function useChat() {
   );
 
   const clearChat = useCallback(() => {
-    setMessages(DEFAULT_CONTEXT);
+    setMessages(INITIAL_MESSAGES);
     setError(null);
   }, [setMessages]);
 
-  const visibleMessages = messages.filter(
-    (message: Message) => message.role !== "developer"
-  );
-
   return {
-    messages: visibleMessages,
-    allMessages: messages,
+    messages,
     loading,
     error,
     sendMessage,
