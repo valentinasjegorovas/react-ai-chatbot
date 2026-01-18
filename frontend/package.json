@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource-variable/nunito-sans": "^5.2.7",
     "@fontsource-variable/open-sans": "^5.2.7",
+    "@fontsource/inter": "^5.2.8",
     "@fontsource/open-sans": "^5.2.7",
     "@fontsource/roboto": "^5.2.9",
     "@tailwindcss/vite": "^4.1.18",

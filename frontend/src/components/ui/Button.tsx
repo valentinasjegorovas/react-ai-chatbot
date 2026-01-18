@@ -20,7 +20,14 @@ export default function Button({
       onClick={onClick}
       className={classNames(
         className,
-        "cursor-pointer disabled:cursor-not-allowed h-12 w-full border rounded-lg text-center flex items-center justify-center"
+        "h-12 w-full rounded-xl font-medium text-[15px]",
+        "flex items-center justify-center gap-2",
+        "transition-all duration-200 ease-out",
+        "bg-[var(--primary)] text-white",
+        "hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-md)]",
+        "active:scale-[0.98]",
+        "disabled:bg-slate-300 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100",
+        "cursor-pointer"
       )}
     >
       {children}

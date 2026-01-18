@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { TailSpin } from "react-loader-spinner";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
@@ -17,7 +16,6 @@ export default function ChatInput({ onSend, loading }: Props) {
     setText("");
   };
 
-  // Enter key to send
   useEffect(() => {
     if (!text.trim()) return;
 
@@ -32,28 +30,36 @@ export default function ChatInput({ onSend, loading }: Props) {
   }, [text, loading]);
 
   return (
-    <div className="space-y-3">
-      <Input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Type a message..."
-      />
-      <Button disabled={!text.trim() || loading} onClick={handleSend}>
+    <div className="flex gap-3">
+      <div className="flex-1">
+        <Input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type your message..."
+        />
+      </div>
+      <Button
+        disabled={!text.trim() || loading}
+        onClick={handleSend}
+        className="!w-12 !rounded-xl shrink-0"
+      >
         {loading ? (
-          <TailSpin
-            visible={true}
-            height="20"
-            width="20"
-            color="#4fa94d"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-            strokeWidth={5}
-          />
+          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
         ) : (
-          "Send"
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+            />
+          </svg>
         )}
       </Button>
     </div>

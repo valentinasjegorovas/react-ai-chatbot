@@ -23,7 +23,17 @@ export default function Input({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={classNames("h-12 w-full border rounded-lg px-5", className)}
+      className={classNames(
+        "h-12 w-full rounded-xl px-4",
+        "bg-white border border-[var(--border)]",
+        "text-[15px] text-[var(--text)]",
+        "placeholder:text-[var(--text-muted)]",
+        "shadow-[var(--shadow)]",
+        "transition-all duration-200 ease-out",
+        "focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary-light)]",
+        "hover:border-slate-300",
+        className
+      )}
     />
   );
 }
